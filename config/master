@@ -475,7 +475,7 @@ ext_pillar:
   - git:
     - master https://vbustash.vistaprint.net/scm/vpup/saltstack.git:
       - root: pillars
-    - master https://[USERNAME]:[PASSWORD]@vbustash.vistaprint.net/scm/vpup/privatewwwpillar.git
+    - master https://[USERNAME]:[PASSWORD]@vbustash.vistaprint.net/scm/vpup/privatesaltpillar.git
 #  - hiera: /etc/hiera.yaml
 #  - cmd_yaml: cat /etc/salt/yaml
 
