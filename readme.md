@@ -20,6 +20,10 @@ SSH into the Vagrant guest and run "docker exec":
 vagrant ssh
 sudo docker exec salt_master [command]
 ```
+Alternatively, you can start an interactive session on the master, then run commands:
+```sh
+sudo docker exec -i -t salt_master /bin/bash
+```
 ##### Examples
 Accept all keys:
 ```sh
