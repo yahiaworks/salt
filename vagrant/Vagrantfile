@@ -1,0 +1,20 @@
+Vagrant.configure("2") do |config|
+
+  config.vm.provision "docker" do |d|
+    d.build_image "/vagrant", args: "-t salt_master"
+    d.run "salt_master", args: "-p 4505:4505 -p 4506:4506 -p 5985:5985 -p 5986:5986"
+  end
+
+  config.vm.box = "ubuntu/xenial64"
+
+  config.vm.synced_folder "..", "/vagrant"
+
+  # salt
+  config.vm.network "forwarded_port", guest:4505, host: 4505
+  config.vm.network "forwarded_port", guest:4506, host: 4506
+  
+  # winrm
+  # stop your winrm service if this fails
+  config.vm.network "forwarded_port", guest:5985, host: 5985 
+  config.vm.network "forwarded_port", guest:5986, host: 5986
+end
