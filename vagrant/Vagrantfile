@@ -1,0 +1,19 @@
+Vagrant.configure("2") do |config|
+
+  config.vm.provision "docker" do |d|
+    d.build_image "/vagrant"
+    d.run "salt_master"
+  end
+
+  config.vm.box = "ubuntu/xenial64"
+
+  #salt
+  config.vm.network "forwarded_port", guest:4505, host: 4505
+  config.vm.network "forwarded_port", guest:4506, host: 4506
+  
+  #winrm
+  config.vm.network "forwarded_port", guest:5985, host: 5985 
+  config.vm.network "forwarded_port", guest:5986, host: 5986
+
+  # TODO copy master and cloud config files
+end
