@@ -20,7 +20,7 @@ RUN apt-get -y install salt-syndic
 ####
 
 # Salt cloud
-RUN pip install pyOpenSSL
+RUN pip install pyOpenSSL --upgrade
 RUN pip install pywinrm
 
 RUN wget https://github.com/CoreSecurity/impacket/releases/download/impacket_0_9_15/impacket-0.9.15.tar.gz
