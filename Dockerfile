@@ -8,16 +8,20 @@ RUN echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/latest xenial mai
 
 RUN apt-get update
 
+# Salt
 RUN apt -y install python-pip
-RUN pip install pyVmomi
-RUN pip install pyOpenSSL
-RUN pip install pywinrm
+RUN pip install pyvmomi
 
 RUN apt-get -y install salt-api
 RUN apt-get -y install salt-cloud
 RUN apt-get -y install salt-master
 RUN apt-get -y install salt-ssh
 RUN apt-get -y install salt-syndic
+####
+
+# Salt cloud
+RUN pip install pyOpenSSL
+RUN pip install pywinrm
 
 RUN wget https://github.com/CoreSecurity/impacket/releases/download/impacket_0_9_15/impacket-0.9.15.tar.gz
 RUN tar -xvzf impacket-0.9.15.tar.gz
@@ -25,6 +29,8 @@ RUN cd impacket-0.9.15 && python setup.py install
 
 COPY config/cloud.profiles.d/vmware.conf /etc/salt/cloud.profiles.d/
 COPY config/cloud.providers.d/vmware.conf /etc/salt/cloud.providers.d/
+####
+
 COPY config/master /etc/salt/
 ADD scripts/run_salt_master.sh /run_salt_master.sh
 RUN chmod a+x /run_salt_master.sh
