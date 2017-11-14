@@ -338,6 +338,7 @@ file_roots:
   base:
     - /srv/salt
     - /srv/salt/states
+    - /srv/salt/orch
 #  dev:
 #    - /srv/salt/dev/services
 #    - /srv/salt/dev/states
@@ -445,6 +446,10 @@ gitfs_remotes:
     - name: saltstack_files
     - root: files
     - mountpoint: salt://files
+  - https://vbustash.vistaprint.net/scm/vpup/saltstack.git:
+    - name: saltstack_orchestration
+    - root: orch
+    - mountpoint: salt://orch
 #  - file:///var/git/saltmaster
 #
 # The gitfs_ssl_verify option specifies whether to ignore ssl certificate
@@ -482,7 +487,7 @@ ext_pillar:
 # The ext_pillar_first option allows for external pillar sources to populate
 # before file system pillar. This allows for targeting file system pillar from
 # ext_pillar.
-#ext_pillar_first: False
+ext_pillar_first: True 
 
 # The pillar_gitfs_ssl_verify option specifies whether to ignore ssl certificate
 # errors when contacting the pillar gitfs backend. You might want to set this to
