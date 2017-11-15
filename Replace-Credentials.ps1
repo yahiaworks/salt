@@ -29,8 +29,6 @@ function Main()
     Replace-SecretInFile $SALTCLOUD_ID $PROVIDER_FILENAME $SALTCLOUD_PASSWORD
 
     Replace-SecretInFile $VIPSADMIN_ID $PROFILE_FILENAME $VIPSADMIN_PASSWORD
-
-    Replace-InFile $PROFILE_FILENAME $MASTER_NAME $MASTER_HOST
 }
 
 function Replace-SecretInFile([int] $private:secretId, [string] $private:file, [string] $private:key, [boolean] $private:isUsername = $False)
