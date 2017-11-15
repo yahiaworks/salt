@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version="0.0.0.6"
+version="0.0.0.8"
 
 sudo docker tag salt_master docker-development.docker.vips.vistaprint.io/vips/salt-master:$version
 sudo docker login docker-development.docker.vips.vistaprint.io
