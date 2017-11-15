@@ -33,7 +33,9 @@ COPY config/cloud.providers.d/vmware.conf /etc/salt/cloud.providers.d/
 
 COPY config/master /etc/salt/
 ADD scripts/run_salt_master.sh /run_salt_master.sh
+ADD scripts/set_master_hostname.sh /
 RUN chmod a+x /run_salt_master.sh
+RUN chmod a+x /set_master_hostname.sh
 
 ADD https://repo.saltstack.com/windows/Salt-Minion-2017.7.2-Py2-AMD64-Setup.exe /
 
@@ -42,4 +44,4 @@ COPY config/patch/cloud.py /usr/lib/python2.7/dist-packages/salt/utils/
 
 EXPOSE 4505 4506 5985 5986 443
 
-CMD ["/run_salt_master.sh"]
+ENTRYPOINT ["/run_salt_master.sh"]
