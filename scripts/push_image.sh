@@ -1,7 +1,20 @@
 #!/bin/bash
 
-version="0.0.0.8"
+set -x
+set -e
 
-sudo docker tag salt_master docker-development.docker.vips.vistaprint.io/vips/salt-master:$version
-sudo docker login docker-development.docker.vips.vistaprint.io
-sudo docker push docker-development.docker.vips.vistaprint.io/vips/salt-master:$version
+function docker_login {
+    sudo docker login docker-development.docker.vips.vistaprint.io
+}
+
+function docker_push {
+    tag=$1
+
+    sudo docker tag salt_master docker-development.docker.vips.vistaprint.io/vips/salt-master:$tag
+    sudo docker push docker-development.docker.vips.vistaprint.io/vips/salt-master:$tag
+}
+
+version="0.0.0.11"
+docker_login
+docker_push $version
+docker_push latest
