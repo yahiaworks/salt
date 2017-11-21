@@ -14,7 +14,7 @@ function docker_push {
     sudo docker push docker-development.docker.vips.vistaprint.io/vips/salt-master:$tag
 }
 
-version="0.0.0.11"
+version="0.0.0.12"
 docker_login
 docker_push $version
 docker_push latest
