@@ -4,10 +4,13 @@ string JENKINS_BUILD_NUMBER = env.BUILD_NUMBER
 string LABELS = 'teamwww'
 SIMULATE = false
 
+def NotifierType = "jenkins/email_notifier.groovy"
+
 buildPassed = true
 
 node () {
     checkout scm
+    notifier = load(NotifierType)
 }
 
 node(LABELS) {
