@@ -16,7 +16,7 @@ node () {
 node(LABELS) {
     checkout scm
 
-    version="0.0.0.0"
+    version=readVersion()
     try {
         stage('Building...') {
             runShellStep("jenkins/docker_build.sh", "build_image", "")
@@ -64,6 +64,13 @@ def runShellStep(module, stepName, stepArgs, returnStdOut=false) {
         echo result
     }
     return result
+}
+
+def readVersion() {
+    string version = readFile 'version.txt'
+    release = version.replaceAll("\\*", env.BUILD_NUMBER)
+    release = version.trim()
+    return version
 }
 
 def getBranchType() {
