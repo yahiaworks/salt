@@ -11,6 +11,8 @@ node () {
 }
 
 node(LABELS) {
+    checkout scm
+
     version="0.0.0.0"
     try {
         stage('Building...') {
