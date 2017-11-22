@@ -69,7 +69,7 @@ def runShellStep(module, stepName, stepArgs, returnStdOut=false) {
 
 def readVersion() {
     string version = readFile 'version.txt'
-    release = version.replaceAll("*", env.BUILD_NUMBER)
+    release = version.replaceAll("\*", env.BUILD_NUMBER)
     release = version.trim()
     return version
 }
