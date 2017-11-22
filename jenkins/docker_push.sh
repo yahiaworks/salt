@@ -31,3 +31,10 @@ function docker_push {
     sudo docker tag salt-master $image_full_name:latest
     sudo docker push $image_full_name:latest
 }
+
+function cleanup {
+    version=$1
+    sudo docker rmi -f salt-master || true
+    sudo docker rmi -f $image_full_name:$version || true
+    sudo docker rmi -f $image_full_name:latest || true
+}

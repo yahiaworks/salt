@@ -22,9 +22,11 @@ node(LABELS) {
             runShellStep("jenkins/docker_build.sh", "build_image", "")
         }
         stage('Pushing...') {
-            withCredentials([usernamePassword(credentialsId: 'd262c113-387e-4a85-bedb-133ced13259b',
-                                              passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {
-                runShellStep("jenkins/docker_push.sh", "publish", "$version $ARTIFACTORY_USER $ARTIFACTORY_PASSWORD")
+            if (getBranchType() == "MASTER") {
+                withCredentials([usernamePassword(credentialsId: 'd262c113-387e-4a85-bedb-133ced13259b',
+                                                passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {
+                    runShellStep("jenkins/docker_push.sh", "publish", "$version $ARTIFACTORY_USER $ARTIFACTORY_PASSWORD")
+                }
             }
         }
     }
@@ -34,6 +36,7 @@ node(LABELS) {
     finally {
         try {
             stage('Cleanup') {
+                runShellStep("jenkins/docker_push.sh", "cleanup", "$version")
             }
         }
         catch (Exception err) {
