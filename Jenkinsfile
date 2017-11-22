@@ -17,6 +17,7 @@ node(LABELS) {
     checkout scm
 
     version = readVersion()
+    echo "$version"
     try {
         stage('Building...') {
             runShellStep("jenkins/docker_build.sh", "build_image", "")
