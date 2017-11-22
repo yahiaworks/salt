@@ -23,7 +23,8 @@ node(LABELS) {
             runShellStep("jenkins/docker_build.sh", "build_image", "")
         }
         stage('Pushing...') {
-            if (getBranchType() == "MASTER") {
+            echo "PUBLISH DISABLED UNTIL CREDS ARE REPLACED IN CONTAINER"
+            if (false && getBranchType() == "MASTER") {
                 withCredentials([usernamePassword(credentialsId: 'd262c113-387e-4a85-bedb-133ced13259b',
                                                 passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {
                     runShellStep("jenkins/docker_push.sh", "publish", "$version $ARTIFACTORY_USER $ARTIFACTORY_PASSWORD")
