@@ -28,8 +28,9 @@ function docker_push {
     sudo docker tag salt-master $image_full_name:$version
     sudo docker push $image_full_name:$version
 
-    sudo docker tag salt-master $image_full_name:latest
-    sudo docker push $image_full_name:latest
+    # Reenable once credentials aren't required in the image itself
+    #sudo docker tag salt-master $image_full_name:latest
+    #sudo docker push $image_full_name:latest
 }
 
 function cleanup {
