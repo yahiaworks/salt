@@ -4,7 +4,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "docker" do |d|
     d.build_image "/vagrant", args: "-t salt_master"
-    d.run "salt_master", args: "-p 4505:4505 -p 4506:4506 -p 5985:5985 -p 5986:5986 -p 389:389", cmd: "#{hostname}.vistaprint.net"
+    d.run "salt_master", args: "-p 4505:4505 -p 4506:4506 -p 5985:5985 -p 5986:5986", cmd: "#{hostname}.vistaprint.net"
   end
 
   config.vm.box = "ubuntu/xenial64"
