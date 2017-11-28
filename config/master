@@ -442,6 +442,7 @@ gitfs_remotes:
   - https://vbustash.vistaprint.net/scm/vpup/saltstack.git:
     - name: saltstack_modules
     - root: _modules
+    - mountpoint: salt://_modules
   - https://vbustash.vistaprint.net/scm/vpup/saltstack.git:
     - name: saltstack_files
     - root: files
