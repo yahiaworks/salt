@@ -45,7 +45,7 @@ ADD https://repo.saltstack.com/windows/Salt-Minion-2017.7.2-Py2-AMD64-Setup.exe 
 COPY config/patch/cloud.py /usr/lib/python2.7/dist-packages/salt/utils/
 COPY config/patch/vmware.py /usr/lib/python2.7/dist-packages/salt/cloud/clouds/
 
-EXPOSE 4505 4506 5985 5986 443
+EXPOSE 4505 4506 5985 5986 443 8000
 
 # Create local salt-api user
 RUN useradd -ms /bin/bash saltapi
