@@ -29,6 +29,8 @@ RUN cd impacket-0.9.15 && python setup.py install
 
 COPY config/cloud.profiles.d/vmware.conf /etc/salt/cloud.profiles.d/
 COPY config/cloud.providers.d/vmware.conf /etc/salt/cloud.providers.d/
+COPY config/certs/star.vistaprint.net/star.vistaprint.net.cert /etc/salt/certs
+COPY config/certs/star.vistaprint.net/star.vistaprint.net.key /etc/salt/certs
 ####
 
 COPY config/master /etc/salt/
