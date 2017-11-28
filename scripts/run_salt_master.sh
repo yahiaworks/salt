@@ -9,4 +9,5 @@ if [ -z ${master_hostname+x} ]; then master_hostname="devsaltvips.vistaprint.net
 echo "Using hostname $master_hostname"
 ./set_master_hostname.sh $master_hostname
 
+salt-api -d
 salt-master -c /etc/salt --log-file-level=quiet --log-level=info

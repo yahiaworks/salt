@@ -164,8 +164,14 @@ timeout: 60
 # Enables the rest_cherrypy module
 rest_cherrypy:
   port: 8000
-  ssl_crt: /etc/salt/certs/star.vistaprint.net.crt
-  ssl_key: /etc/salt/certs/star.vistaprint.net.key
+  disable_ssl: True
+  #ssl_crt: /etc/salt/certs/star.vistaprint.net.crt
+  #ssl_key: /etc/salt/certs/star.vistaprint.net.key
+
+external_auth:
+  pam:
+    saltapi:
+      - .*
 
 #####        Security settings       #####
 ##########################################
@@ -670,3 +676,5 @@ winrepo_remotes:
 winrepo_remotes_ng:
   - 'https://github.com/saltstack/salt-winrepo-ng.git'
   - 'https://vbustash.vistaprint.net/scm/vpup/saltwinrepo.git'
+
+
