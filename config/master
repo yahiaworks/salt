@@ -168,11 +168,6 @@ rest_cherrypy:
   #ssl_crt: /etc/salt/certs/star.vistaprint.net.crt
   #ssl_key: /etc/salt/certs/star.vistaprint.net.key
 
-external_auth:
-  pam:
-    saltapi:
-      - .*
-
 #####        Security settings       #####
 ##########################################
 # Enable "open mode", this mode still maintains encryption, but turns off
@@ -237,6 +232,8 @@ external_auth:
   pam:
     saltapi:
       - .*
+      - '@runner'
+      - '@jobs'
 
 # Time (in seconds) for a newly generated token to live. Default: 12 hours
 #token_expire: 43200
