@@ -29,6 +29,8 @@ RUN cd impacket-0.9.15 && python setup.py install
 
 COPY config/cloud.profiles.d/vmware.conf /etc/salt/cloud.profiles.d/
 COPY config/cloud.providers.d/vmware.conf /etc/salt/cloud.providers.d/
+COPY config/certs/star.vistaprint.net/star.vistaprint.net.crt /etc/salt/certs/
+COPY config/certs/star.vistaprint.net/star.vistaprint.net.key /etc/salt/certs/
 ####
 
 COPY config/master /etc/salt/
@@ -43,6 +45,10 @@ ADD https://repo.saltstack.com/windows/Salt-Minion-2017.7.2-Py2-AMD64-Setup.exe 
 COPY config/patch/cloud.py /usr/lib/python2.7/dist-packages/salt/utils/
 COPY config/patch/vmware.py /usr/lib/python2.7/dist-packages/salt/cloud/clouds/
 
-EXPOSE 4505 4506 5985 5986 443
+EXPOSE 4505 4506 5985 5986 443 8000
+
+# Create local salt-api user
+RUN useradd -ms /bin/bash saltapi
+RUN echo 'saltapi:password1' | chpasswd
 
 ENTRYPOINT ["/run_salt_master.sh"]

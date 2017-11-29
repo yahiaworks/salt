@@ -161,6 +161,12 @@ timeout: 60
 #include:
 #  - /etc/salt/extra_config
 
+# Enables the rest_cherrypy module
+rest_cherrypy:
+  port: 8000
+  disable_ssl: True
+  #ssl_crt: /etc/salt/certs/star.vistaprint.net.crt
+  #ssl_key: /etc/salt/certs/star.vistaprint.net.key
 
 #####        Security settings       #####
 ##########################################
@@ -222,10 +228,12 @@ timeout: 60
 
 # The external auth system uses the Salt auth modules to authenticate and
 # validate users to access areas of the Salt system.
-#external_auth:
-#  pam:
-#    fred:
-#      - test.*
+external_auth:
+  pam:
+    saltapi:
+      - .*
+      - '@runner'
+      - '@jobs'
 
 # Time (in seconds) for a newly generated token to live. Default: 12 hours
 #token_expire: 43200
@@ -665,3 +673,5 @@ winrepo_remotes:
 winrepo_remotes_ng:
   - 'https://github.com/saltstack/salt-winrepo-ng.git'
   - 'https://vbustash.vistaprint.net/scm/vpup/saltwinrepo.git'
+
+
