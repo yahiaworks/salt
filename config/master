@@ -167,6 +167,7 @@ rest_cherrypy:
   disable_ssl: True
   #ssl_crt: /etc/salt/certs/star.vistaprint.net.crt
   #ssl_key: /etc/salt/certs/star.vistaprint.net.key
+rest_timeout: 14400000
 
 #####        Security settings       #####
 ##########################################
