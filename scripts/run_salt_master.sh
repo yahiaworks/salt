@@ -10,4 +10,5 @@ echo "Using hostname $master_hostname"
 ./set_master_hostname.sh $master_hostname
 
 salt-api -d
+salt-run winrepo.update_git_repos
 salt-master -c /etc/salt --log-file-level=quiet --log-level=info
