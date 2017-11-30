@@ -2,12 +2,7 @@
 
 set -x
 
-master_hostname=$1
-
-if [ -z ${master_hostname+x} ]; then master_hostname="devsaltvips.vistaprint.net"; fi
-
-echo "Using hostname $master_hostname"
-./set_master_hostname.sh $master_hostname
+./replace_credentials.sh
 
 salt-api -d
 salt-run winrepo.update_git_repos

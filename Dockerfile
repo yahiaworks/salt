@@ -35,9 +35,9 @@ COPY config/certs/star.vistaprint.net/star.vistaprint.net.key /etc/salt/certs/
 
 COPY config/master /etc/salt/
 ADD scripts/run_salt_master.sh /run_salt_master.sh
-ADD scripts/set_master_hostname.sh /
+ADD scripts/replace_credentials.sh /
 RUN chmod a+x /run_salt_master.sh
-RUN chmod a+x /set_master_hostname.sh
+RUN chmod a+x /replace_credentials.sh
 
 ADD https://repo.saltstack.com/windows/Salt-Minion-2017.7.2-Py2-AMD64-Setup.exe /
 

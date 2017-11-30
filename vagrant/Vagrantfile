@@ -2,9 +2,22 @@ Vagrant.configure("2") do |config|
 
   hostname = ENV["COMPUTERNAME"]
 
+  config.trigger.before :up do
+    `powershell cd ..;.\\Create-CredentialsFile.ps1`
+  end
+
+  config.trigger.before :reload do
+    `powershell cd ..;.\\Create-CredentialsFile.ps1`
+  end
+  
+  config.trigger.before :destroy do
+    `powershell Remove-File -Force -ErrorAction SilentlyContinue ..\\secrets.txt`
+  end
+
+
   config.vm.provision "docker" do |d|
     d.build_image "/vagrant", args: "-t salt_master"
-    d.run "salt_master", args: "-p 4505:4505 -p 4506:4506 -p 5985:5985 -p 5986:5986 -p 8000:8000", cmd: "#{hostname}.vistaprint.net"
+    d.run "salt_master", args: "--env-file /vagrant/secrets.txt -p 4505:4505 -p 4506:4506 -p 5985:5985 -p 5986:5986 -p 8000:8000", cmd: "#{hostname}.vistaprint.net"
   end
 
   config.vm.box = "ubuntu/xenial64"
