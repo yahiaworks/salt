@@ -1,8 +1,6 @@
 param (
 )
 
-Import-Module c:\vp\devenv\ps\modules\SecretServer\SecretServer.psm1 -DisableNameChecking -Force
-
 $script:MASTER_HOST = "devwltvipssm002.vistaprint.net"
 
 $script:PRIVATE_PILLAR_ID = 18010
@@ -15,6 +13,9 @@ $script:outfilename = "secrets.txt"
 
 function Main()
 {   
+    Get-SSModule
+    Import-SSModule
+
     Remove-Item -ErrorAction SilentlyContinue $outfilename
 
     Write-SecretInFile $PRIVATE_PILLAR_ID "PRIVATE_PILLAR_USER" $True
@@ -44,6 +45,14 @@ function Write-InFile($private:key, $private:value)
 function Get-Credential([int] $private:secretId)
 {
     getSecretServerCredentialsById $secretId
+}
+
+function Get-SSModule() {
+    Invoke-WebRequest -Outfile .\SecretServer-1.1.0.psm1 https://vbuartifactory.vips.vpsvc.com/artifactory/libs-release-local/com.vistaprint/PowershellModules/SecretServer/1.1.0/SecretServer-1.1.0.psm1
+}
+
+function Import-SSModule {
+    Import-Module .\SecretServer-1.1.0.psm1 -DisableNameChecking -Force
 }
 
 Main
