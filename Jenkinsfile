@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 string JENKINS_BRANCH_NAME = BRANCH_NAME
 string JENKINS_BUILD_NUMBER = env.BUILD_NUMBER
-string JENKINS_DEPLOY_PROJECT = "VIPS.Deploy2Octopus.Dev.Release"
+string JENKINS_DEPLOY_PROJECT = "Deploy2Octopus.Dev.Release"
 string OCTOPUS_PROJECT = "VIPS Salt Master"
 string OCTOPUS_ENV = "INF-DEV-A"
 string LABELS = 'teamwww'
