@@ -1,6 +1,9 @@
 #!/usr/bin/env groovy
 string JENKINS_BRANCH_NAME = BRANCH_NAME
 string JENKINS_BUILD_NUMBER = env.BUILD_NUMBER
+string JENKINS_DEPLOY_PROJECT = "VIPS.Deploy2Octopus.Dev.Release"
+string OCTOPUS_PROJECT = "VIPS Salt Master"
+string OCTOPUS_ENV = "INF-DEV-A"
 string LABELS = 'teamwww'
 SIMULATE = false
 
@@ -30,6 +33,10 @@ node(LABELS) {
                 }
             }
         }
+        stage('Deploying...') {
+            echo "Deploying ${version}..."
+            deployRelease(version)
+        }
     }
     catch (Exception err) {
         failBuild(err)
@@ -51,6 +58,21 @@ node(LABELS) {
             }
         }
     }
+}
+
+def deployRelease(version) {
+            try {
+                echo """
+                    Scheduling $JENKINS_DEPLOY_PROJECT for
+                        project     => $OCTOPUS_PROJECT
+                        environment => $OCTOPUS_ENV
+                        release     => $version
+                """
+                deploy_job = build job: "$JENKINS_DEPLOY_PROJECT",
+                    parameters: [string(name: 'octopus_project', value: "$OCTOPUS_PROJECT"),
+                        string(name: 'octopus_environment', value: "$OCTOPUS_ENV"),
+                        string(name: 'release_version', value: "$release")]
+            }
 }
 
 def runShellStep(module, stepName, stepArgs, returnStdOut=false) {
