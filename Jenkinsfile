@@ -61,18 +61,18 @@ node(LABELS) {
 }
 
 def deployRelease(version) {
-            try {
-                echo """
-                    Scheduling $JENKINS_DEPLOY_PROJECT for
-                        project     => $OCTOPUS_PROJECT
-                        environment => $OCTOPUS_ENV
-                        release     => $version
-                """
-                deploy_job = build job: "$JENKINS_DEPLOY_PROJECT",
-                    parameters: [string(name: 'octopus_project', value: "$OCTOPUS_PROJECT"),
-                        string(name: 'octopus_environment', value: "$OCTOPUS_ENV"),
-                        string(name: 'release_version', value: "$release")]
-            }
+    echo """
+        Scheduling $JENKINS_DEPLOY_PROJECT for
+        project     => $OCTOPUS_PROJECT
+        environment => $OCTOPUS_ENV
+        release     => $version
+    """
+    deploy_job = build job: "$JENKINS_DEPLOY_PROJECT",
+                       parameters: [
+                            string(name: 'octopus_project', value: "$OCTOPUS_PROJECT"),
+                            string(name: 'octopus_environment', value: "$OCTOPUS_ENV"),
+                            string(name: 'release_version', value: "$release")
+                        ]
 }
 
 def runShellStep(module, stepName, stepArgs, returnStdOut=false) {
