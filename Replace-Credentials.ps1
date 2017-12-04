@@ -7,6 +7,7 @@ Import-Module c:\vp\devenv\ps\modules\SecretServer\SecretServer.psm1 -DisableNam
 $script:PROFILE_FILENAME = "config\cloud.profiles.d\vmware.conf"
 $script:PROVIDER_FILENAME = "config\cloud.providers.d\vmware.conf"
 $script:MASTER_FILENAME = "config\master"
+$script:DOCKER_FILENAME = "Dockerfile"
 
 $script:MASTER_NAME = "[MASTER NAME]"
 $script:MASTER_HOST = "devwltvipssm002.vistaprint.net"
@@ -21,6 +22,10 @@ $script:VIPSADMIN_PASSWORD = "[VIPSADMIN PASSWORD]"
 $script:SALTCLOUD_ID = 18300
 $script:SALTCLOUD_PASSWORD = "[VCENTER_VIPS_PASSWORD]"
 
+$script:SALTAPI_ID = 18596
+$script:SALTAPI_USERNAME = "[SALTAPI_USERNAME]"
+$script:SALTAPI_PASSWORD = "[SALTAPI_PASSWORD]"
+
 function Main()
 {
     Replace-SecretInFile $PRIVATE_PILLAR_ID $MASTER_FILENAME $PRIVATE_PILLAR_USERNAME $True
@@ -29,6 +34,9 @@ function Main()
     Replace-SecretInFile $SALTCLOUD_ID $PROVIDER_FILENAME $SALTCLOUD_PASSWORD
 
     Replace-SecretInFile $VIPSADMIN_ID $PROFILE_FILENAME $VIPSADMIN_PASSWORD
+
+    Replace-SecretInFile $SALTAPI_ID $DOCKER_FILENAME $SALTAPI_USERNAME $True
+    Replace-SecretInFile $SALTAPI_ID $DOCKER_FILENAME $SALTAPI_PASSWORD
 }
 
 function Replace-SecretInFile([int] $private:secretId, [string] $private:file, [string] $private:key, [boolean] $private:isUsername = $False)

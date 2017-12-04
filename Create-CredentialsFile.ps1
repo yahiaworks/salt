@@ -9,6 +9,8 @@ $script:VIPSADMIN_ID = 18148
 
 $script:SALTCLOUD_ID = 18300
 
+$script:SALTAPI_ID = 18596
+
 $script:outfilename = "secrets.txt"
 
 function Main()
@@ -24,6 +26,9 @@ function Main()
     Write-SecretInFile $SALTCLOUD_ID "VCENTER_PASSWORD"
 
     Write-SecretInFile $VIPSADMIN_ID "VIPSADMIN_PASSWORD"
+
+    Write-SecretInFile $SALTAPI_ID "SALTAPI_USER" $True
+    Write-SecretInFile $SALTAPI_ID "SALTAPI_PASSWORD"
 
     $hostname = (hostname) + ".vistaprint.net"
     Write-InFile "MASTER_HOSTNAME" $hostname
