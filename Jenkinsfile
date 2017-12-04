@@ -71,7 +71,7 @@ def deployRelease(version) {
                        parameters: [
                             string(name: 'octopus_project', value: "$OCTOPUS_PROJECT"),
                             string(name: 'octopus_environment', value: "$OCTOPUS_ENV"),
-                            string(name: 'release_version', value: "$release")
+                            string(name: 'release_version', value: "$version")
                         ]
 }
 
