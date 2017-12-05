@@ -4,13 +4,20 @@ string JENKINS_BUILD_NUMBER = env.BUILD_NUMBER
 string JENKINS_DEPLOY_PROJECT = "Deploy2Octopus.Dev.Release"
 string OCTOPUS_PROJECT = "VIPS Salt Master"
 string OCTOPUS_ENV = "INF-DEV-A"
-string DOCKER_REPO = "docker-development.docker.vips.vistaprint.io"
 string LABELS = 'teamwww'
+
+string SOURCE_REPO="docker-development.docker.vips.vistaprint.io"
+string DEST_REPO="docker-release.docker.vips.vistaprint.io"
+
 SIMULATE = false
 
 def NotifierType = "jenkins/email_notifier.groovy"
 
 buildPassed = true
+
+parameters {
+	string(defaultValue: "", description: 'The version to promote', name: 'Version')
+}
 
 node () {
     checkout scm
@@ -19,24 +26,17 @@ node () {
 
 node(LABELS) {
     checkout scm
-
-    version = readVersion()
-    echo "$version"
+    version = params.Version
     try {
-        stage('Building...') {
-            runShellStep("jenkins/docker_build.sh", "build_image", "")
+        stage('Pulling...') {
+            runShellStep("jenkins/docker_pull.sh", "pull", "$SOURCE_REPO $version")
         }
+
         stage('Pushing...') {
-            if (getBranchType() == "MASTER") {
-                withCredentials([usernamePassword(credentialsId: 'd262c113-387e-4a85-bedb-133ced13259b',
-                                                passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {
-                    runShellStep("jenkins/docker_push.sh", "publish", "$DOCKER_REPO $version $ARTIFACTORY_USER $ARTIFACTORY_PASSWORD")
-                }
+            withCredentials([usernamePassword(credentialsId: 'd262c113-387e-4a85-bedb-133ced13259b',
+                                              passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {
+                runShellStep("jenkins/docker_push.sh", "publish", "$DEST_REPO $version $ARTIFACTORY_USER $ARTIFACTORY_PASSWORD")
             }
-        }
-        stage('Deploying...') {
-            echo "Deploying ${version}..."
-            deployRelease(version)
         }
     }
     catch (Exception err) {
@@ -45,7 +45,8 @@ node(LABELS) {
     finally {
         try {
             stage('Cleanup') {
-                runShellStep("jenkins/docker_push.sh", "cleanup", "$DOCKER_REPO $version")
+                runShellStep("jenkins/docker_push.sh", "cleanup", "$SOURCE_REPO $version")
+                runShellStep("jenkins/docker_push.sh", "cleanup", "$DEST_REPO $version")
             }
         }
         catch (Exception err) {
@@ -59,21 +60,6 @@ node(LABELS) {
             }
         }
     }
-}
-
-def deployRelease(version) {
-    echo """
-        Scheduling $JENKINS_DEPLOY_PROJECT for
-        project     => $OCTOPUS_PROJECT
-        environment => $OCTOPUS_ENV
-        release     => $version
-    """
-    deploy_job = build job: "$JENKINS_DEPLOY_PROJECT",
-                       parameters: [
-                            string(name: 'octopus_project', value: "$OCTOPUS_PROJECT"),
-                            string(name: 'octopus_environment', value: "$OCTOPUS_ENV"),
-                            string(name: 'release_version', value: "$version")
-                        ]
 }
 
 def runShellStep(module, stepName, stepArgs, returnStdOut=false) {
