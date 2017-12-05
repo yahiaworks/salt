@@ -3,7 +3,7 @@
 PROFILE_FILENAME="/etc/salt/cloud.profiles.d/vmware.conf"
 PROVIDER_FILENAME="/etc/salt/cloud.providers.d/vmware.conf"
 MASTER_FILENAME="/etc/salt/master"
-RUN_SALT_MASTER_FILENAME="/etc/salt/run_salt_master.sh"
+RUN_SALT_MASTER_FILENAME="/run_salt_master.sh"
 
 
 MASTER_NAME_KEY="\[MASTER_NAME\]"
