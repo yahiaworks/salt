@@ -15,9 +15,11 @@ def NotifierType = "jenkins/email_notifier.groovy"
 
 buildPassed = true
 
-parameters {
-	string(defaultValue: "", description: 'The version to promote', name: 'Version')
-}
+properties([
+    parameters {
+        string(defaultValue: "", description: 'The version to promote', name: 'Version')
+    }
+])
 
 node () {
     checkout scm
