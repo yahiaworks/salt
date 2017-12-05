@@ -3,7 +3,6 @@
 PROFILE_FILENAME="/etc/salt/cloud.profiles.d/vmware.conf"
 PROVIDER_FILENAME="/etc/salt/cloud.providers.d/vmware.conf"
 MASTER_FILENAME="/etc/salt/master"
-RUN_SALT_MASTER_FILENAME="/run_salt_master.sh"
 
 
 MASTER_NAME_KEY="\[MASTER_NAME\]"
@@ -25,8 +24,6 @@ function main {
     replace_value "$PRIVATE_PILLAR_PASSWORD_KEY" $PRIVATE_PILLAR_PASSWORD $MASTER_FILENAME
     replace_value "$VIPSADMIN_PASSWORD_KEY" $VIPSADMIN_PASSWORD $PROFILE_FILENAME
     replace_value "$VCENTER_PASSWORD_KEY" $VCENTER_PASSWORD $PROVIDER_FILENAME
-    replace_value "$SALTAPI_USERNAME_KEY" $SALTAPI_USERNAME $RUN_SALT_MASTER_FILENAME
-    replace_value "$SALTAPI_PASSWORD_KEY" $SALTAPI_PASSWORD $RUN_SALT_MASTER_FILENAME
 }
 
 function replace_value {
