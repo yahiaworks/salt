@@ -27,7 +27,7 @@ function Main()
 
     Write-SecretInFile $VIPSADMIN_ID "VIPSADMIN_PASSWORD"
 
-    Write-SecretInFile $SALTAPI_ID "SALTAPI_USER" $True
+    Write-SecretInFile $SALTAPI_ID "SALTAPI_USERNAME" $True
     Write-SecretInFile $SALTAPI_ID "SALTAPI_PASSWORD"
 
     $hostname = (hostname) + ".vistaprint.net"
