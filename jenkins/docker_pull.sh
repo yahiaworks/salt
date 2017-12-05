@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-
+set -x 
 image_name="vips/salt-master"
 
 function pull {
