@@ -21,10 +21,10 @@ function promote {
     user=$4
     password=$5
 
-    sudo docker tag "$src_repo/$image_name/$version" "$dst_repo/$image_name/$version"
+    sudo docker tag "$src_repo/$image_name:$version" "$dst_repo/$image_name:$version"
     
     docker_login $dst_repo $user $password
-    docker_push "$dst_repo/$image_name/$version"
+    docker_push "$dst_repo/$image_name:$version"
 }
 
 function docker_login {
