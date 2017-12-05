@@ -31,7 +31,6 @@ COPY config/cloud.profiles.d/vmware.conf /etc/salt/cloud.profiles.d/
 COPY config/cloud.providers.d/vmware.conf /etc/salt/cloud.providers.d/
 COPY config/certs/star.vistaprint.net/star.vistaprint.net.crt /etc/salt/certs/
 COPY config/certs/star.vistaprint.net/star.vistaprint.net.key /etc/salt/certs/
-COPY scripts/run_salt_master.sh /etc/salt/run_salt_master.sh
 ####
 
 COPY config/master /etc/salt/
