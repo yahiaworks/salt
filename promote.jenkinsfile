@@ -27,6 +27,10 @@ node(LABELS) {
             runShellStep("jenkins/docker_pull.sh", "pull", "$SOURCE_REPO $version")
         }
 
+        stage('Tagging...') {
+            runShellStep("jenkins/docker_tag.sh", "retag", "$SOURCE_REPO $DEST_REPO $version")
+        }
+
         stage('Pushing...') {
             withCredentials([usernamePassword(credentialsId: 'd262c113-387e-4a85-bedb-133ced13259b',
                                               passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {
