@@ -16,9 +16,9 @@ def NotifierType = "jenkins/email_notifier.groovy"
 buildPassed = true
 
 properties([
-    parameters {
+    parameters {[
         string(defaultValue: "", description: 'The version to promote', name: 'Version')
-    }
+    ]}
 ])
 
 node () {
