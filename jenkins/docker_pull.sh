@@ -10,5 +10,5 @@ function pull {
 
     image_full_name="$repo/$image_name"
 
-    docker_pull $repo $image_full_name:$version
+    sudo docker pull $repo $image_full_name:$version
 }

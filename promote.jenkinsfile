@@ -1,5 +1,4 @@
 #!/usr/bin/env groovy
-string JENKINS_BRANCH_NAME = BRANCH_NAME
 string JENKINS_BUILD_NUMBER = env.BUILD_NUMBER
 string JENKINS_DEPLOY_PROJECT = "Deploy2Octopus.Dev.Release"
 string OCTOPUS_PROJECT = "VIPS Salt Master"
@@ -16,12 +15,6 @@ def NotifierType = "jenkins/email_notifier.groovy"
 buildPassed = true
 
 node () {
-    properties([
-        parameters {[
-            string(defaultValue: "", description: 'The version to promote', name: 'Version')
-        ]}
-    ])
-
     checkout scm
     notifier = load(NotifierType)
 }
@@ -86,10 +79,7 @@ def readVersion() {
 }
 
 def getBranchType() {
-    if (BRANCH_NAME == "master") {
-        return "MASTER"
-    }
-    return "FEATURE"
+    return "MASTER"
 }
 
 def failBuild(err) {
