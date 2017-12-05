@@ -35,8 +35,10 @@ node(LABELS) {
             }
         }
         stage('Deploying...') {
-            echo "Deploying ${version}..."
-            deployRelease(version)
+            if (getBranchType() == "MASTER") {
+                echo "Deploying ${version}..."
+                deployRelease(version)
+            }
         }
     }
     catch (Exception err) {
