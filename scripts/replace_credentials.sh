@@ -4,14 +4,11 @@ PROFILE_FILENAME="/etc/salt/cloud.profiles.d/vmware.conf"
 PROVIDER_FILENAME="/etc/salt/cloud.providers.d/vmware.conf"
 MASTER_FILENAME="/etc/salt/master"
 
-
 MASTER_NAME_KEY="\[MASTER_NAME\]"
 PRIVATE_PILLAR_USERNAME_KEY="\[USERNAME\]"
 PRIVATE_PILLAR_PASSWORD_KEY="\[PASSWORD\]"
 VIPSADMIN_PASSWORD_KEY="\[VIPSADMIN_PASSWORD\]"
 VCENTER_PASSWORD_KEY="\[VCENTER_VIPS_PASSWORD\]"
-SALTAPI_USERNAME_KEY="\[SALTAPI_USERNAME\]"
-SALTAPI_PASSWORD_KEY="\[SALTAPI_PASSWORD\]"
 
 function main {
     # Allow config to already have replacements performed (for local dev)
