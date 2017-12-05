@@ -3,12 +3,16 @@
 PROFILE_FILENAME="/etc/salt/cloud.profiles.d/vmware.conf"
 PROVIDER_FILENAME="/etc/salt/cloud.providers.d/vmware.conf"
 MASTER_FILENAME="/etc/salt/master"
+RUN_SALT_MASTER_FILENAME="/etc/salt/run_salt_master.sh"
+
 
 MASTER_NAME_KEY="\[MASTER_NAME\]"
 PRIVATE_PILLAR_USERNAME_KEY="\[USERNAME\]"
 PRIVATE_PILLAR_PASSWORD_KEY="\[PASSWORD\]"
 VIPSADMIN_PASSWORD_KEY="\[VIPSADMIN_PASSWORD\]"
 VCENTER_PASSWORD_KEY="\[VCENTER_VIPS_PASSWORD\]"
+SALTAPI_USERNAME_KEY="\[SALTAPI_USERNAME\]"
+SALTAPI_PASSWORD_KEY="\[SALTAPI_PASSWORD\]"
 
 function main {
     # Allow config to already have replacements performed (for local dev)
@@ -21,6 +25,8 @@ function main {
     replace_value "$PRIVATE_PILLAR_PASSWORD_KEY" $PRIVATE_PILLAR_PASSWORD $MASTER_FILENAME
     replace_value "$VIPSADMIN_PASSWORD_KEY" $VIPSADMIN_PASSWORD $PROFILE_FILENAME
     replace_value "$VCENTER_PASSWORD_KEY" $VCENTER_PASSWORD $PROVIDER_FILENAME
+    replace_value "$SALTAPI_USERNAME_KEY" $SALTAPI_USERNAME $RUN_SALT_MASTER_FILENAME
+    replace_value "$SALTAPI_PASSWORD_KEY" $SALTAPI_PASSWORD $RUN_SALT_MASTER_FILENAME
 }
 
 function replace_value {
@@ -40,6 +46,8 @@ function check_env_vars {
     check_env_var "MASTER_HOSTNAME" $MASTER_HOSTNAME
     check_env_var "VIPSADMIN_PASSWORD" $VIPSADMIN_PASSWORD
     check_env_var "VCENTER_PASSWORD" $VCENTER_PASSWORD
+    check_env_var "SALTAPI_USERNAME" $SALTAPI_USERNAME
+    check_env_var "SALTAPI_PASSWORD" $SALTAPI_PASSWORD
 }
 
 function check_env_var {
