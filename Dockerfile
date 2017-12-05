@@ -31,6 +31,7 @@ COPY config/cloud.profiles.d/vmware.conf /etc/salt/cloud.profiles.d/
 COPY config/cloud.providers.d/vmware.conf /etc/salt/cloud.providers.d/
 COPY config/certs/star.vistaprint.net/star.vistaprint.net.crt /etc/salt/certs/
 COPY config/certs/star.vistaprint.net/star.vistaprint.net.key /etc/salt/certs/
+COPY scripts/run_salt_master.sh /etc/salt/run_salt_master.sh
 ####
 
 COPY config/master /etc/salt/
@@ -46,9 +47,5 @@ COPY config/patch/cloud.py /usr/lib/python2.7/dist-packages/salt/utils/
 COPY config/patch/vmware.py /usr/lib/python2.7/dist-packages/salt/cloud/clouds/
 
 EXPOSE 4505 4506 5985 5986 443 8000
-
-# Create local salt-api user
-RUN useradd -ms /bin/bash [SALTAPI_USERNAME]
-RUN echo '[SALTAPI_USERNAME]:[SALTAPI_PASSWORD]' | chpasswd
 
 ENTRYPOINT ["/run_salt_master.sh"]
