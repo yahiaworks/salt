@@ -23,11 +23,7 @@ node(LABELS) {
     checkout scm
     version = params.Version
     try {
-        stage('Pulling...') {
-            runShellStep("jenkins/docker_pull.sh", "pull", "$SOURCE_REPO $version")
-        }
-
-        stage('Pushing...') {
+        stage('Promote') {
             withCredentials([usernamePassword(credentialsId: 'd262c113-387e-4a85-bedb-133ced13259b',
                                               passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {
                 runShellStep("jenkins/docker_push.sh", "promote", "$SOURCE_REPO $DEST_REPO $version $ARTIFACTORY_USER $ARTIFACTORY_PASSWORD")

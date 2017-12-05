@@ -21,6 +21,7 @@ function promote {
     user=$4
     password=$5
 
+    sudo docker pull "$src_repo/$image_name:$version"
     sudo docker tag "$src_repo/$image_name:$version" "$dst_repo/$image_name:$version"
     
     docker_login $dst_repo $user $password
