@@ -3,6 +3,7 @@
 PROFILE_FILENAME="/etc/salt/cloud.profiles.d/vmware.conf"
 PROVIDER_FILENAME="/etc/salt/cloud.providers.d/vmware.conf"
 MASTER_FILENAME="/etc/salt/master"
+SALTPAD_FILENAME="/etc/nginx/sites-enabled/default"
 
 MASTER_NAME_KEY="\[MASTER_NAME\]"
 PRIVATE_PILLAR_USERNAME_KEY="\[USERNAME\]"
@@ -21,6 +22,7 @@ function main {
     replace_value "$PRIVATE_PILLAR_PASSWORD_KEY" $PRIVATE_PILLAR_PASSWORD $MASTER_FILENAME
     replace_value "$VIPSADMIN_PASSWORD_KEY" $VIPSADMIN_PASSWORD $PROFILE_FILENAME
     replace_value "$VCENTER_PASSWORD_KEY" $VCENTER_PASSWORD $PROVIDER_FILENAME
+    replace_value "$MASTER_NAME_KEY" $MASTER_HOSTNAME $SALTPAD_FILENAME
 }
 
 function replace_value {
