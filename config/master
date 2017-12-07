@@ -164,9 +164,8 @@ timeout: 60
 # Enables the rest_cherrypy module
 rest_cherrypy:
   port: 8000
-  disable_ssl: True
-  #ssl_crt: /etc/salt/certs/star.vistaprint.net.crt
-  #ssl_key: /etc/salt/certs/star.vistaprint.net.key
+  ssl_crt: /etc/salt/certs/star.vistaprint.net.crt
+  ssl_key: /etc/salt/certs/star.vistaprint.net.key
 rest_timeout: 14400000
 
 #####        Security settings       #####
@@ -231,7 +230,7 @@ rest_timeout: 14400000
 # validate users to access areas of the Salt system.
 external_auth:
   pam:
-    saltapi:
+    salt-api:
       - .*
       - '@runner'
       - '@jobs'
