@@ -4,6 +4,8 @@ set -x
 
 ./replace_credentials.sh
 
+nginx
+
 # Create local salt-api user
 useradd -ms /bin/bash $SALTAPI_USERNAME
 echo "$SALTAPI_USERNAME:$SALTAPI_PASSWORD" | chpasswd
