@@ -9,6 +9,8 @@ $script:VIPSADMIN_ID = 18148
 
 $script:SALTCLOUD_ID = 18300
 
+$script:SALTAPI_ID = 18596
+
 $script:CERT_ID = 8789
 
 $script:outfilename = "secrets.txt"
@@ -26,6 +28,9 @@ function Main()
     Write-SecretInFile $SALTCLOUD_ID "VCENTER_PASSWORD"
 
     Write-SecretInFile $VIPSADMIN_ID "VIPSADMIN_PASSWORD"
+
+    Write-SecretInFile $SALTAPI_ID "SALTAPI_USERNAME" $True
+    Write-SecretInFile $SALTAPI_ID "SALTAPI_PASSWORD"
 
     Write-SecretInFile $CERT_ID "PEM_PASSPHRASE" -UserField "Notes"
 

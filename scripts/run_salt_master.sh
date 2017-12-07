@@ -6,6 +6,10 @@ set -x
 
 nginx
 
+# Create local salt-api user
+useradd -ms /bin/bash $SALTAPI_USERNAME
+echo "$SALTAPI_USERNAME:$SALTAPI_PASSWORD" | chpasswd
+
 # Decrypt key
 openssl rsa -in /etc/salt/certs/star.vistaprint.net.key.encrypted -out /etc/salt/certs/star.vistaprint.net.key -passin pass:$PEM_PASSPHRASE
 
