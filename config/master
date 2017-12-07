@@ -230,7 +230,7 @@ rest_timeout: 14400000
 # validate users to access areas of the Salt system.
 external_auth:
   pam:
-    saltapi:
+    salt-api:
       - .*
       - '@runner'
       - '@jobs'
