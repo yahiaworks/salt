@@ -58,8 +58,4 @@ COPY config/patch/vmware.py /usr/lib/python2.7/dist-packages/salt/cloud/clouds/
 
 EXPOSE 4505 4506 5985 5986 443 8000 8080
 
-# Create local salt-api user
-RUN useradd -ms /bin/bash saltapi
-RUN echo 'saltapi:password1' | chpasswd
-
 ENTRYPOINT ["/run_salt_master.sh"]
