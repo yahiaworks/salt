@@ -17,6 +17,9 @@ RUN apt-get -y install salt-cloud
 RUN apt-get -y install salt-master
 RUN apt-get -y install salt-ssh
 RUN apt-get -y install salt-syndic
+
+RUN pip uninstall -y cherrypy
+RUN pip install cherrypy==3.2.3
 ####
 
 # Salt cloud
@@ -29,8 +32,11 @@ RUN cd impacket-0.9.15 && python setup.py install
 
 COPY config/cloud.profiles.d/vmware.conf /etc/salt/cloud.profiles.d/
 COPY config/cloud.providers.d/vmware.conf /etc/salt/cloud.providers.d/
+
+# SSL
+RUN mkdir /etc/salt/certs
 COPY config/certs/star.vistaprint.net/star.vistaprint.net.crt /etc/salt/certs/
-COPY config/certs/star.vistaprint.net/star.vistaprint.net.key /etc/salt/certs/
+COPY config/certs/star.vistaprint.net/star.vistaprint.net.key.encrypted /etc/salt/certs/
 ####
 
 # SaltPad

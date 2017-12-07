@@ -9,6 +9,8 @@ $script:VIPSADMIN_ID = 18148
 
 $script:SALTCLOUD_ID = 18300
 
+$script:CERT_ID = 8789
+
 $script:outfilename = "secrets.txt"
 
 function Main()
@@ -25,13 +27,16 @@ function Main()
 
     Write-SecretInFile $VIPSADMIN_ID "VIPSADMIN_PASSWORD"
 
+    Write-SecretInFile $CERT_ID "PEM_PASSPHRASE" -UserField "Notes"
+
     $hostname = (hostname) + ".vistaprint.net"
     Write-InFile "MASTER_HOSTNAME" $hostname
 }
 
-function Write-SecretInFile([int] $private:secretId, [string] $private:key, [boolean] $private:isUsername = $False)
+function Write-SecretInFile([int] $private:secretId, [string] $private:key, [boolean] $private:isUsername = $False,
+                            [string] $userField="Username", [string] $passwordField="Password")
 {
-    $creds = Get-Credential $secretId
+    $creds = Get-Credential $secretId $userField $passwordField
     $value = if ($isUsername) {$creds.User} else {$creds.Password}
 
     Write-InFile $key $value
@@ -42,17 +47,17 @@ function Write-InFile($private:key, $private:value)
     Add-Content $script:outfilename "$key=$value`n" -NoNewLine 
 }
 
-function Get-Credential([int] $private:secretId)
+function Get-Credential([int] $private:secretId, [string] $userField, [string] $passwordField)
 {
-    getSecretServerCredentialsById $secretId
+    getSecretServerCredentialsById -UsernameField $userField -PasswordField $passwordField $secretId
 }
 
 function Get-SSModule() {
-    Invoke-WebRequest -Outfile .\SecretServer-1.1.0.psm1 https://vbuartifactory.vips.vpsvc.com/artifactory/libs-release-local/com.vistaprint/PowershellModules/SecretServer/1.1.0/SecretServer-1.1.0.psm1
+    Invoke-WebRequest -Outfile .\SecretServer-1.2.0.psm1 https://vbuartifactory.vips.vpsvc.com/artifactory/libs-release-local/com.vistaprint/PowershellModules/SecretServer/1.2.0/SecretServer-1.2.0.psm1
 }
 
 function Import-SSModule {
-    Import-Module .\SecretServer-1.1.0.psm1 -DisableNameChecking -Force
+    Import-Module .\SecretServer-1.2.0.psm1 -DisableNameChecking -Force
 }
 
 Main
