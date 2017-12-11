@@ -20,6 +20,8 @@ RUN apt-get -y install salt-syndic
 
 RUN pip uninstall -y cherrypy
 RUN pip install cherrypy==3.2.3
+
+VOLUME ['/etc/salt/pki']
 ####
 
 # Salt cloud
