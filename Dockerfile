@@ -12,11 +12,11 @@ RUN apt-get update
 RUN apt -y install python-pip
 RUN pip install pyvmomi
 
-RUN apt-get -y install salt-api
-RUN apt-get -y install salt-cloud
-RUN apt-get -y install salt-master
-RUN apt-get -y install salt-ssh
-RUN apt-get -y install salt-syndic
+RUN apt-get -y install salt-api=2017.7.2+ds-1
+RUN apt-get -y install salt-cloud=2017.7.2+ds-1
+RUN apt-get -y install salt-master=2017.7.2+ds-1
+RUN apt-get -y install salt-ssh=2017.7.2+ds-1
+RUN apt-get -y install salt-syndic=2017.7.2+ds-1
 
 RUN pip uninstall -y cherrypy
 RUN pip install cherrypy==3.2.3
@@ -59,8 +59,10 @@ RUN chmod a+x /replace_credentials.sh
 ADD https://repo.saltstack.com/windows/Salt-Minion-2017.7.2-Py2-AMD64-Setup.exe /
 
 # Patch some salt files... hopefully we don't need this for long!
-COPY config/patch/cloud.py /usr/lib/python2.7/dist-packages/salt/utils/
-COPY config/patch/vmware.py /usr/lib/python2.7/dist-packages/salt/cloud/clouds/
+COPY config/patch/cloud.py.patch /tmp/
+COPY config/patch/vmware.py.patch /tmp/
+RUN patch /usr/lib/python2.7/dist-packages/salt/utils/cloud.py < /tmp/cloud.py.patch
+RUN patch /usr/lib/python2.7/dist-packages/salt/cloud/clouds/vmware.py < /tmp/vmware.py.patch
 
 EXPOSE 4505 4506 5985 5986 443 8000 8080
 
