@@ -46,6 +46,7 @@ function check_env_vars {
     check_env_var "VCENTER_PASSWORD" $VCENTER_PASSWORD
     check_env_var "SALTAPI_USERNAME" $SALTAPI_USERNAME
     check_env_var "SALTAPI_PASSWORD" $SALTAPI_PASSWORD
+    check_env_var "LDAPJENKINSVBU_PASSWORD" $LDAPJENKINSVBU_PASSWORD
 }
 
 function check_env_var {
