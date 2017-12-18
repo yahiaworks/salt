@@ -271,8 +271,8 @@ auth.ldap.persontype: person
 auth.ldap.minion_stripdomains: []
  
 auth.ldap.basedn: 'DC=vistaprint,DC=net'
-auth.ldap.binddn: 'CN=LDAPJenkinsVBU,OU=_Service Accounts,OU=Office,OU=Corporate,DC=vistaprint,DC=net'
-auth.ldap.bindpw: '[LDAPJENKINSVBU_PASSWORD]'
+auth.ldap.binddn: 'CN=[LDAPBIND_USERNAME],OU=_Service Accounts,OU=Office,OU=Corporate,DC=vistaprint,DC=net'
+auth.ldap.bindpw: '[LDAPBIND_PASSWORD]'
  
 # Redhat Identity Policy Audit
 auth.ldap.freeipa: False

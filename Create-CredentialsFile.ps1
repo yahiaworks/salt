@@ -13,7 +13,7 @@ $script:SALTAPI_ID = 18596
 
 $script:CERT_ID = 8789
 
-$script:LDAPJENKINSVBU_ID = 3805
+$script:LDAPSALT_ID = 18713
 
 $script:outfilename = "secrets.txt"
 
@@ -36,7 +36,8 @@ function Main()
 
     Write-SecretInFile $CERT_ID "PEM_PASSPHRASE" -UserField "Notes"
 
-    Write-SecretInFile $LDAPJENKINSVBU_ID "LDAPJENKINSVBU_PASSWORD"
+    Write-SecretInFile $LDAPSALT_ID "LDAPBIND_USERNAME" $True
+    Write-SecretInFile $LDAPSALT_ID "LDAPBIND_PASSWORD"
 
     $hostname = (hostname) + ".vistaprint.net"
     Write-InFile "MASTER_HOSTNAME" $hostname
