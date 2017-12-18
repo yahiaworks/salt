@@ -281,8 +281,6 @@ auth.ldap.freeipa: False
 # The external auth system uses the Salt auth modules to authenticate and
 # validate users to access areas of the Salt system.
 external_auth:
-  pam:
-    # any pam auth can be added
   ldap:
     salt-api:
       - .*
