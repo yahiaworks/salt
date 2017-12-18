@@ -226,10 +226,62 @@ rest_timeout: 14400000
 #  modules:
 #    - cmd
 
+## LDAP Configuration ##
+# for user and group authentication
+ 
+# Server to auth against
+auth.ldap.server: ldaps.wlt.vistaprint.net
+ 
+# Port to connect via
+auth.ldap.port: 636
+ 
+# Use TLS when connecting
+auth.ldap.tls: False
+ 
+# LDAP scope level, almost always 2
+auth.ldap.scope: 2
+ 
+# Server specified in URI format
+auth.ldap.uri: 'ldaps://ldaps.wlt.vistaprint.net:636'    # Overrides .ldap.server, .ldap.port, .ldap.tls above
+ 
+# Verify server's TLS certificate
+auth.ldap.no_verify: True
+ 
+# Bind to LDAP anonymously to determine group membership
+# Active Directory does not allow anonymous binds without special configuration
+# In addition, if auth.ldap.anonymous is True, empty bind passwords are not permitted.
+auth.ldap.anonymous: False
+ 
+# FOR TESTING ONLY, this is a VERY insecure setting.
+# If this is True, the LDAP bind password will be ignored and
+# access will be determined by group membership alone with
+# the group memberships being retrieved via anonymous bind
+auth.ldap.auth_by_group_membership_only: False
+ 
+auth.ldap.activedirectory: True
+ 
+auth.ldap.filter: '(CN={{ username }})'
+ 
+#auth.ldap.accountattributename: cn
+ 
+auth.ldap.groupclass: person
+ 
+auth.ldap.persontype: person
+ 
+auth.ldap.minion_stripdomains: []
+ 
+auth.ldap.basedn: 'DC=vistaprint,DC=net'
+auth.ldap.binddn: 'CN=[LDAPBIND_USERNAME],OU=_Service Accounts,OU=Office,OU=Corporate,DC=vistaprint,DC=net'
+auth.ldap.bindpw: '[LDAPBIND_PASSWORD]'
+ 
+# Redhat Identity Policy Audit
+auth.ldap.freeipa: False
+
+
 # The external auth system uses the Salt auth modules to authenticate and
 # validate users to access areas of the Salt system.
 external_auth:
-  pam:
+  ldap:
     salt-api:
       - .*
       - '@runner'

@@ -27,6 +27,7 @@ VOLUME ['/etc/salt/pki']
 # Salt cloud
 RUN pip install pyOpenSSL --upgrade
 RUN pip install pywinrm
+RUN apt-get -y install python-ldap
 
 RUN wget https://github.com/CoreSecurity/impacket/releases/download/impacket_0_9_15/impacket-0.9.15.tar.gz
 RUN tar -xvzf impacket-0.9.15.tar.gz
