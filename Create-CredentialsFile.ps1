@@ -36,8 +36,8 @@ function Main()
 
     Write-SecretInFile $CERT_ID "PEM_PASSPHRASE" -UserField "Notes"
 
-    Write-SecretInFile $LDAPSALT_ID "LDAPBIND_USERNAME" $True
-    Write-SecretInFile $LDAPSALT_ID "LDAPBIND_PASSWORD"
+    Write-SecretInFile $LDAPSALT_ID "LDAPSALT_USERNAME" $True
+    Write-SecretInFile $LDAPSALT_ID "LDAPSALT_PASSWORD"
 
     $hostname = (hostname) + ".vistaprint.net"
     Write-InFile "MASTER_HOSTNAME" $hostname
