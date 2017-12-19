@@ -7,7 +7,7 @@ $script:PRIVATE_PILLAR_ID = 18010
 
 $script:VIPSADMIN_ID = 18148
 
-$script:SALTCLOUD_ID = 18300
+$script:SALTCLOUD_ID = 18704
 
 $script:SALTAPI_ID = 18596
 

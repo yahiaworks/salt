@@ -9,7 +9,8 @@ RUN echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/latest xenial mai
 RUN apt-get update
 
 # Salt
-RUN apt -y install python-pip
+RUN apt-get -y install python-pip
+RUN pip install --upgrade pip
 RUN pip install pyvmomi
 
 RUN apt-get -y install salt-api=2017.7.2+ds-1
