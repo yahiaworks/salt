@@ -9,16 +9,10 @@ RUN echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/latest xenial mai
 RUN apt-get update
 
 # Salt
-RUN apt-get -y install python-pip
+RUN apt-get -y install python-pip salt-api salt-cloud salt-master salt-ssh salt-syndic
+
 RUN pip install --upgrade pip
 RUN pip install pyvmomi
-
-RUN apt-get -y install salt-api=2017.7.2+ds-1
-RUN apt-get -y install salt-cloud=2017.7.2+ds-1
-RUN apt-get -y install salt-master=2017.7.2+ds-1
-RUN apt-get -y install salt-ssh=2017.7.2+ds-1
-RUN apt-get -y install salt-syndic=2017.7.2+ds-1
-
 RUN pip uninstall -y cherrypy
 RUN pip install cherrypy==3.2.3
 
