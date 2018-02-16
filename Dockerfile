@@ -1,10 +1,13 @@
 FROM ubuntu:16.04
 
 RUN apt-get update
+RUN apt-get -y install apt-transport-https --fix-missing
 
-ADD https://repo.saltstack.com/apt/ubuntu/16.04/amd64/latest/SALTSTACK-GPG-KEY.pub /tmp/SALTSTACK-GPG-KEY.pub
+# To get the latest, use: https://repo.saltstack.com/apt/ubuntu/16.04/amd64/latest
+# Locking version to 2017.7.2, which is in https://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/2017.7.2
+ADD https://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/2017.7.2/SALTSTACK-GPG-KEY.pub /tmp/SALTSTACK-GPG-KEY.pub
 RUN apt-key add /tmp/SALTSTACK-GPG-KEY.pub
-RUN echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/latest xenial main" > /etc/apt/sources.list.d/saltstack.list
+RUN echo "deb https://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/2017.7.2/ xenial main" > /etc/apt/sources.list.d/saltstack.list
 
 RUN apt-get update
 
