@@ -16,11 +16,7 @@ RUN apt-get -y install python-pip
 RUN pip install --upgrade pip
 RUN pip install pyvmomi
 
-RUN apt-get -y install salt-api=2017.7.2+ds-1
-RUN apt-get -y install salt-cloud=2017.7.2+ds-1
-RUN apt-get -y install salt-master=2017.7.2+ds-1
-RUN apt-get -y install salt-ssh=2017.7.2+ds-1
-RUN apt-get -y install salt-syndic=2017.7.2+ds-1
+RUN apt-get -y install salt-api=2017.7.2+ds-1 salt-cloud=2017.7.2+ds-1 salt-master=2017.7.2+ds-1 salt-ssh=2017.7.2+ds-1 salt-syndic=2017.7.2+ds-1
 
 RUN pip uninstall -y cherrypy
 RUN pip install cherrypy==3.2.3
