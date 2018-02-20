@@ -12,7 +12,7 @@ RUN echo "deb https://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/2017.7.2
 RUN apt-get update
 
 # Salt
-RUN apt-get -y install python-pip salt-api salt-cloud salt-master salt-ssh salt-syndic
+RUN apt-get -y install python-pip
 
 RUN pip install --upgrade pip
 RUN pip install pyvmomi
