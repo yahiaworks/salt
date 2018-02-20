@@ -1,5 +1,5 @@
 #!/bin/bash
- 
+
 PROFILE_FILENAME="/etc/salt/cloud.profiles.d/vmware.conf"
 PROVIDER_FILENAME="/etc/salt/cloud.providers.d/vmware.conf"
 MASTER_FILENAME="/etc/salt/master"
@@ -14,20 +14,32 @@ VCENTER_PASSWORD_KEY="\[SALT_CLOUD_PASSWORD\]"
 LDAPSALT_PASSWORD_KEY="\[LDAPSALT_PASSWORD\]"
 LDAPSALT_USERNAME_KEY="\[LDAPSALT_USERNAME\]"
 
+PARAM_PREFIX="/Salt/WWW"
+
 function main {
     # Allow config to already have replacements performed (for local dev)
     if [ -n "$CHECK_ENV_VARS" ]; then
         check_env_vars
     fi
 
+    replace_value_from_aws "$PRIVATE_PILLAR_USERNAME_KEY" "$PARAM_PREFIX/PRIVATE_PILLAR_USER" $MASTER_FILENAME
+    replace_value_from_aws "$PRIVATE_PILLAR_PASSWORD_KEY" "$PARAM_PREFIX/PRIVATE_PILLAR_PASSWORD" $MASTER_FILENAME
+    replace_value_from_aws "$VIPSADMIN_PASSWORD_KEY" "$PARAM_PREFIX/VIPSADMIN_PASSWORD" $PROFILE_FILENAME
+    replace_value_from_aws "$VCENTER_PASSWORD_KEY" "$PARAM_PREFIX/VIPSADMIN_PASSWORD" $PROVIDER_FILENAME
+    replace_value_from_aws "$LDAPSALT_PASSWORD_KEY" "$PARAM_PREFIX/SALTAPI_PASSWORD" $MASTER_FILENAME
+    replace_value_from_aws "$LDAPSALT_USERNAME_KEY" "$PARAM_PREFIX/SALTAPI_USERNAME" $MASTER_FILENAME
+
     replace_value "$MASTER_NAME_KEY" $MASTER_HOSTNAME $PROFILE_FILENAME
-    replace_value "$PRIVATE_PILLAR_USERNAME_KEY" $PRIVATE_PILLAR_USER $MASTER_FILENAME
-    replace_value "$PRIVATE_PILLAR_PASSWORD_KEY" $PRIVATE_PILLAR_PASSWORD $MASTER_FILENAME
-    replace_value "$VIPSADMIN_PASSWORD_KEY" $VIPSADMIN_PASSWORD $PROFILE_FILENAME
-    replace_value "$VCENTER_PASSWORD_KEY" $VCENTER_PASSWORD $PROVIDER_FILENAME
     replace_value "$MASTER_NAME_KEY" $MASTER_HOSTNAME $SALTPAD_FILENAME
-    replace_value "$LDAPSALT_PASSWORD_KEY" $LDAPSALT_PASSWORD $MASTER_FILENAME
-    replace_value "$LDAPSALT_USERNAME_KEY" $LDAPSALT_USERNAME $MASTER_FILENAME
+}
+
+function replace_value_from_aws {
+    key=$1
+    parameter_name=$2
+    file=$3
+
+    parameter_value=`aws ssm get-parameter --name $parameter_name --with-decryption | jq -r ".Parameter.Value"`
+    replace_value $key $parameter_value $file
 }
 
 function replace_value {
@@ -42,15 +54,9 @@ function replace_value {
 }
 
 function check_env_vars {
-    check_env_var "PRIVATE_PILLAR_USER" $PRIVATE_PILLAR_USER
-    check_env_var "PRIVATE_PILLAR_PASSWORD" $PRIVATE_PILLAR_PASSWORD
-    check_env_var "MASTER_HOSTNAME" $MASTER_HOSTNAME
-    check_env_var "VIPSADMIN_PASSWORD" $VIPSADMIN_PASSWORD
-    check_env_var "VCENTER_PASSWORD" $VCENTER_PASSWORD
-    check_env_var "SALTAPI_USERNAME" $SALTAPI_USERNAME
-    check_env_var "SALTAPI_PASSWORD" $SALTAPI_PASSWORD
-    check_env_var "LDAPSALT_USERNAME" $LDAPSALT_USERNAME
-    check_env_var "LDAPSALT_PASSWORD" $LDAPSALT_PASSWORD
+    check_env_var "AWS_ACCESS_KEY_ID"
+    check_env_var "AWS_SECRET_ACCESS_KEY"
+    check_env_var "MASTER_HOSTNAME"
 }
 
 function check_env_var {

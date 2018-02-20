@@ -1,20 +1,7 @@
 param (
 )
 
-$script:MASTER_HOST = "devwltvipssm002.vistaprint.net"
-
-$script:PRIVATE_PILLAR_ID = 18010
-
-$script:VIPSADMIN_ID = 18148
-
-$script:SALTCLOUD_ID = 18704
-
-$script:SALTAPI_ID = 18596
-
-$script:CERT_ID = 8789
-
-$script:LDAPSALT_ID = 18713
-
+$script:AWS_KEY_ID = 19235
 $script:outfilename = "secrets.txt"
 
 function Main()
@@ -24,20 +11,9 @@ function Main()
 
     Remove-Item -ErrorAction SilentlyContinue $outfilename
 
-    Write-SecretInFile $PRIVATE_PILLAR_ID "PRIVATE_PILLAR_USER" $True
-    Write-SecretInFile $PRIVATE_PILLAR_ID "PRIVATE_PILLAR_PASSWORD"
-    
-    Write-SecretInFile $SALTCLOUD_ID "VCENTER_PASSWORD"
-
-    Write-SecretInFile $VIPSADMIN_ID "VIPSADMIN_PASSWORD"
-
-    Write-SecretInFile $SALTAPI_ID "SALTAPI_USERNAME" $True
-    Write-SecretInFile $SALTAPI_ID "SALTAPI_PASSWORD"
-
-    Write-SecretInFile $CERT_ID "PEM_PASSPHRASE" -UserField "Notes"
-
-    Write-SecretInFile $LDAPSALT_ID "LDAPSALT_USERNAME" $True
-    Write-SecretInFile $LDAPSALT_ID "LDAPSALT_PASSWORD"
+    Write-SecretInFile $AWS_KEY_ID "AWS_ACCESS_KEY_ID" $True -UserField "Access Key ID" -passwordField "Secret Access Key"
+    Write-SecretInFile $AWS_KEY_ID "AWS_SECRET_ACCESS_KEY" $False -UserField "Access Key ID" -passwordField "Secret Access Key"
+    Write-InFile "AWS_DEFAULT_REGION" "us-east-1"
 
     $hostname = (hostname) + ".vistaprint.net"
     Write-InFile "MASTER_HOSTNAME" $hostname

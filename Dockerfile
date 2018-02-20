@@ -53,10 +53,14 @@ RUN apt-get -y install nginx
 COPY saltpad/nginx/default /etc/nginx/sites-enabled/default
 ####
 
-# Additional dependencies
+### Additional dependencies
+
 # For AWS Param extension module
 RUN pip install boto3
 RUN pip install awscli --upgrade
+
+# JSON manipulation
+RUN apt-get -y install jq
 ####
 
 COPY config/master /etc/salt/
