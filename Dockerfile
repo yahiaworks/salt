@@ -56,6 +56,7 @@ COPY saltpad/nginx/default /etc/nginx/sites-enabled/default
 # Additional dependencies
 # For AWS Param extension module
 RUN pip install boto3
+RUN pip install awscli --upgrade
 ####
 
 COPY config/master /etc/salt/
