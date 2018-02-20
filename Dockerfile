@@ -13,7 +13,6 @@ RUN apt-get update
 
 # Salt
 RUN apt-get -y install python-pip
-
 RUN pip install --upgrade pip
 RUN pip install pyvmomi
 
