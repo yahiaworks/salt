@@ -53,6 +53,11 @@ RUN apt-get -y install nginx
 COPY saltpad/nginx/default /etc/nginx/sites-enabled/default
 ####
 
+# Additional dependencies
+# For AWS Param extension module
+RUN pip install boto3
+####
+
 COPY config/master /etc/salt/
 ADD scripts/run_salt_master.sh /run_salt_master.sh
 ADD scripts/replace_credentials.sh /
