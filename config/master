@@ -398,6 +398,7 @@ file_roots:
   base:
     - /srv/salt
     - /srv/salt/states
+    - /srv/salt/formulas
     - /srv/salt/orch
 #  dev:
 #    - /srv/salt/dev/services
@@ -495,6 +496,9 @@ gitfs_remotes:
   - https://vbustash.vistaprint.net/scm/vpup/saltstack.git:
     - name: saltstack_states
     - root: states
+  - https://vbustash.vistaprint.net/scm/vpup/saltstack.git:
+    - name: saltstack_formulas
+    - root: formulas
   - https://vbustash.vistaprint.net/scm/vpup/saltstack.git:
     - name: saltstack_custom_states
     - root: _states
