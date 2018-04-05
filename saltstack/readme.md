@@ -1,0 +1,1 @@
+Put your saltstack state repo structure here to test locally!
