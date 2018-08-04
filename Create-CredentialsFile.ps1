@@ -39,7 +39,7 @@ function Get-Credential([int] $private:secretId, [string] $userField, [string] $
 }
 
 function Get-SSModule() {
-    Invoke-WebRequest -Outfile .\SecretServer-1.2.0.psm1 https://vbuartifactory.vips.vpsvc.com/artifactory/libs-release-local/com.vistaprint/PowershellModules/SecretServer/1.2.0/SecretServer-1.2.0.psm1
+    Invoke-WebRequest -Outfile .\SecretServer-1.2.0.psm1 https://vbuartifactory.vistaprint.svc/artifactory/libs-release-local/com.vistaprint/PowershellModules/SecretServer/1.2.0/SecretServer-1.2.0.psm1
 }
 
 function Import-SSModule {
