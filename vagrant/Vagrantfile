@@ -11,14 +11,15 @@ Vagrant.configure("2") do |config|
     `powershell cd ..;.\\Create-CredentialsFile.ps1`
   end
   
-  config.trigger.before :destroy do
-    `powershell Remove-Item -Force -ErrorAction SilentlyContinue ..\\secrets.txt`
-  end
 
   config.vm.provision "docker" do |d|
     d.build_image "/vagrant", args: "-t salt-master"
   end
-
+ 
+  
+  
+  
+	
   config.vm.provision "shell", inline: "/vagrant/host/create_volumes.sh"
   config.vm.provision "shell", inline: "/vagrant/host/run_master_container.sh"
 
