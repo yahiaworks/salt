@@ -731,6 +731,9 @@ winrepo_remotes_ng:
   - 'https://github.com/saltstack/salt-winrepo-ng.git'
   - 'https://vbustash.vistaprint.net/scm/vpup/saltwinrepo.git'
 
+osenv:
+  driver: env
+
 vault:
     url: https://vault.vips.vpsvc.com
     auth:
