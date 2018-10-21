@@ -731,4 +731,10 @@ winrepo_remotes_ng:
   - 'https://github.com/saltstack/salt-winrepo-ng.git'
   - 'https://vbustash.vistaprint.net/scm/vpup/saltwinrepo.git'
 
-
+vault:
+    url: https://vault.vips.vpsvc.com
+    auth:
+        method: token
+		token: 8342202b-e96d-151a-0f88-874f4b61bec4
+    policies:
+        - salt-policy
