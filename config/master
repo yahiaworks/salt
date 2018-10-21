@@ -734,6 +734,9 @@ winrepo_remotes_ng:
 osenv:
   driver: env
 
+ext_pillar:
+  - vault: path=Salt/domain
+
 vault:
     url: https://vault.vips.vpsvc.com
     auth:
