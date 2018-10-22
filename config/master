@@ -741,7 +741,7 @@ vault:
     url: https://vault.vips.vpsvc.com
     auth:
         method: token
-        token: a37e8730-b7be-f0cb-8900-517b7051d06f
+        token: 16e71804-4f56-c424-798c-11d2bb4ca9f4
     policies:
         - salt-policy
 
