@@ -512,7 +512,7 @@ gitfs_remotes:
     - name: saltstack_files
     - root: files
     - mountpoint: salt://files
-  - https://vbustash.vistaprint.net/scm/vpup/saltstack.git:
+  - https://vbustash.vistaprint.net/scm/~e10110665/phoenix-saltstack.git:
     - name: saltstack_orchestration
     - root: orch
     - mountpoint: salt://orch
