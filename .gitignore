@@ -3,4 +3,3 @@ vagrant/ubuntu-xenial-16.04-cloudimg-console.log
 secrets.txt
 SecretServer-1.1.0.psm1
 /SecretServer-1.2.0.psm1
-/saltstack/*
