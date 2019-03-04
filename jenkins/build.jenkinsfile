@@ -4,7 +4,7 @@ string JENKINS_BUILD_NUMBER = env.BUILD_NUMBER
 string JENKINS_DEPLOY_PROJECT = "Deploy2Octopus.Dev.Release"
 string OCTOPUS_PROJECT = "VIPS Salt Master"
 string OCTOPUS_ENV = "INF-DEV-A"
-string DOCKER_REPO = "docker-development.docker.vips.vistaprint.io"
+string DOCKER_REPO = "artifactory.vips.vpsvc.com"
 string LABELS = 'teamwww'
 SIMULATE = false
 
