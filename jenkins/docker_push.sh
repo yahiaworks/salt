@@ -3,7 +3,7 @@
 set -e
 set -x
 
-image_name="vips/salt-master"
+image_name="phoenix/salt-master"
 
 function publish {
     repo=$1
