@@ -497,18 +497,18 @@ gitfs_remotes:
   - https://vbustash.vistaprint.net/scm/vpup/phoenix-saltstack.git:
     - name: saltstack_states
     - root: states
-  - https://vbustash.vistaprint.net/scm/vpup/saltstack.git:
+  - https://vbustash.vistaprint.net/scm/vpup/phoenix-saltstack.git:
     - name: saltstack_formulas
     - root: formulas
-  - https://vbustash.vistaprint.net/scm/vpup/saltstack.git:
+  - https://vbustash.vistaprint.net/scm/vpup/phoenix-saltstack.git:
     - name: saltstack_custom_states
     - root: _states
     - mountpoint: salt://_states
-  - https://vbustash.vistaprint.net/scm/vpup/saltstack.git:
+  - https://vbustash.vistaprint.net/scm/vpup/phoenix-saltstack.git:
     - name: saltstack_modules
     - root: _modules
     - mountpoint: salt://_modules
-  - https://vbustash.vistaprint.net/scm/vpup/saltstack.git:
+  - https://vbustash.vistaprint.net/scm/vpup/phoenix-saltstack.git:
     - name: saltstack_files
     - root: files
     - mountpoint: salt://files
