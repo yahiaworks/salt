@@ -4,7 +4,7 @@ string JENKINS_BUILD_NUMBER = env.BUILD_NUMBER
 string JENKINS_DEPLOY_PROJECT = "Deploy2Octopus.Dev.Release"
 string OCTOPUS_PROJECT = "VIPS Salt Master"
 string OCTOPUS_ENV = "INF-DEV-A"
-string DOCKER_REPO = "artifactory.vips.vpsvc.com"
+string DOCKER_REPO = "quay.vips.vpsvc.com"
 string LABELS = 'teamwww'
 SIMULATE = false
 
@@ -28,9 +28,9 @@ node(LABELS) {
         }
         stage('Pushing...') {
             if (getBranchType() == "MASTER") {
-                withCredentials([usernamePassword(credentialsId: 'd262c113-387e-4a85-bedb-133ced13259b',
-                                                passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {
-                    runShellStep("jenkins/docker_push.sh", "publish", "$DOCKER_REPO $version $ARTIFACTORY_USER $ARTIFACTORY_PASSWORD")
+                withCredentials([usernamePassword(credentialsId: 'a9de813a-f174-406e-925d-db0947710b6c',
+                                                passwordVariable: 'QUAY_PASSWORD', usernameVariable: 'QUAY_USER')]) {
+                    runShellStep("jenkins/docker_push.sh", "publish", "$DOCKER_REPO $version $QUAY_USER $QUAY_PASSWORD")
                 }
             }
         }
